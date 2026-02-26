@@ -210,40 +210,45 @@ a { color: var(--d2); }
   display: flex;
   position: relative;
 }
+
+/* Left column — fixed 64px, dot centred at 20px from left */
 .ev-l {
-  width: clamp(52px, 12vw, 68px);
+  width: 64px;
   flex-shrink: 0;
-  padding: 14px 0 0 var(--pad);
+  padding-top: 14px;
   position: relative;
 }
-/* vertical connector */
+/* vertical line through dot centre */
 .ev:not(:last-child) .ev-l::after {
   content: '';
   position: absolute;
-  left: calc(var(--pad) + 12px);
+  left: 20px;
   top: 24px; bottom: 0;
   width: 1px;
   background: var(--line);
 }
 .ev-dot {
   position: absolute;
-  left: calc(var(--pad) + 8px);
+  left: 16px;
   top: 16px;
   width: 9px; height: 9px;
   border-radius: 50%;
   background: var(--line);
   border: 2px solid var(--bg);
 }
+/* Time sits BELOW dot, centred in left column */
 .ev-time {
   font-family: 'DM Mono', monospace;
-  font-size: clamp(10px, 1.8vw, 11px);
+  font-size: 10px;
   color: var(--muted);
-  padding-top: 2px;
-  line-height: 1;
+  line-height: 1.2;
+  padding-top: 28px;       /* push below the dot */
+  padding-left: 2px;
+  white-space: nowrap;
 }
 .ev-r {
   flex: 1;
-  padding: clamp(10px,2.5vw,14px) var(--pad) clamp(10px,2.5vw,14px) 8px;
+  padding: clamp(10px,2.5vw,14px) var(--pad) clamp(10px,2.5vw,14px) 12px;
   border-bottom: 1px solid var(--line);
   min-width: 0;
 }
@@ -469,7 +474,7 @@ footer {
     <div class="day-hd-bar" style="background:var(--d1)"></div>
     <div class="day-hd-label" style="color:var(--d1)">Day 1 · Thu 27 Feb</div>
     <div class="day-hd-title">Arrival Day 🚄</div>
-    <div class="day-hd-sub">Kanazawa 14:00 → เช็คอิน → ราเมนหัวกระดูกวัว</div>
+    <div class="day-hd-sub">Kanazawa 14:00 → Osaka Station → Yodoyabashi → โรงแรม</div>
   </div>
 
   <div class="tl">
@@ -478,32 +483,24 @@ footer {
       <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">14:00</div></div>
       <div class="ev-r">
         <div class="ev-title">🚄 ออกจาก Kanazawa Station</div>
-        <div class="ev-note">Thunderbird Limited Express → Shin-Osaka (~2 ชม. 15 นาที)</div>
-        <div class="tx"><span class="tx-ico">💡</span>ซื้อ ICOCA Card ¥2,000 ที่ Shin-Osaka เลย (มัดจำ ¥500)</div>
-      </div>
-    </div>
-
-    <div class="ev train">
-      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">16:15</div></div>
-      <div class="ev-r">
-        <div class="ev-title">ถึง Shin-Osaka Station</div>
-        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line 🔴 → Yodoyabashi หรือ Tanimachi Line → Higashi-Umeda (~5 นาที)</div>
+        <div class="ev-note">Thunderbird Limited Express → Osaka Station (~2 ชม. 30 นาที)</div>
+        <div class="tx"><span class="tx-ico">💡</span>ซื้อ ICOCA Card ¥2,000 ที่ Osaka Station เลย (มัดจำ ¥500) · เติมได้ตลอดทริป</div>
       </div>
     </div>
 
     <div class="ev train">
       <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">16:30</div></div>
       <div class="ev-r">
-        <div class="ev-title">เดินทางต่อ → Yodoyabashi</div>
-        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line 🔴 → Yodoyabashi (M17) · ใช้เวลา ~5 นาที</div>
+        <div class="ev-title">ถึง Osaka Station (Umeda)</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line 🔴 ทิศใต้ → Yodoyabashi (M17) · <strong>1 สถานี ~2 นาที</strong> · ลงสถานีเดียวกับ Keihan Yodoyabashi</div>
       </div>
     </div>
 
     <div class="ev sight">
-      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">17:00</div></div>
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">16:40</div></div>
       <div class="ev-r">
         <div class="ev-title">🏨 เช็คอิน Best Western Plus Fino Kitahama</div>
-        <div class="tx"><span class="tx-ico">🚶</span>ออก Exit 4 Yodoyabashi · เดินตรงไปทาง Imabashi ~8 นาที · ผ่านริมแม่น้ำ Tosabori สวยมาก</div>
+        <div class="ev-note">ออก Exit 4 Yodoyabashi · เดินตรงไปทางทิศตะวันออก ~8 นาที · ผ่านริมแม่น้ำ Tosabori สวยมาก</div>
       </div>
     </div>
 
@@ -890,6 +887,7 @@ footer {
   <div class="info-h">🚇 สถานีที่ใช้บ่อย</div>
   <div class="st-grid">
     <div class="st-card"><div class="st-name">Kitahama (K14)</div><div class="st-line">Sakaisuji Line 🟡</div><div class="st-note">ใกล้โรงแรมที่สุด</div></div>
+    <div class="st-card"><div class="st-name">Osaka Station (M16)</div><div class="st-line">Midosuji Line 🔴 / JR</div><div class="st-note">ลงจาก Thunderbird · 1 สถานีถึง Yodoyabashi</div></div>
     <div class="st-card"><div class="st-name">Yodoyabashi (M17)</div><div class="st-line">Midosuji Line 🔴</div><div class="st-note">ลงแล้วเดินถึงโรงแรม ~8 นาที</div></div>
     <div class="st-card"><div class="st-name">Namba (M20)</div><div class="st-line">Midosuji 🔴 / Sennichimae 🩷</div><div class="st-note">Day 2 & 3 ทั้งวัน</div></div>
     <div class="st-card"><div class="st-name">Tennoji (M23)</div><div class="st-line">Midosuji 🔴 / Tanimachi 🟣</div><div class="st-note">Day 3 Shinsekai</div></div>
