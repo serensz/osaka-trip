@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="description" content="แผนเที่ยวโอซาก้า 27 Feb – 2 Mar พร้อมข้อมูลการเดินทางทุกจุด">
+<title>🗾 Osaka Trip · 27 Feb–2 Mar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --ink:    #1a1a2e;
+  --ink2:   #3d3d5c;
+  --muted:  #8888aa;
+  --bg:     #f7f5f0;
+  --line:   #e8e4dc;
+  --card:   #ffffff;
+
+  --d1: #c84b31;  /* red    – Day 1 */
+  --d2: #2563a8;  /* blue   – Day 2 */
+  --d3: #2d7a4f;  /* green  – Day 3 */
+  --d4: #7c3aed;  /* purple – Day 4 */
+
+  --transit-bg:     #eef6ff;
+  --transit-border: #2563a8;
+  --gold:    #b8860b;
+  --izakaya: #b8520b;
+
+  --max-w: 720px;
+  --pad:   clamp(14px, 4vw, 24px);
+}
+
+/* ═══════════════════════════════════════
+   RESET
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans Thai', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: clamp(14px, 2.5vw, 16px);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+button { font-family: inherit; cursor: pointer; }
+a { color: var(--d2); }
+
+/* ═══════════════════════════════════════
+   LAYOUT WRAPPER
+═══════════════════════════════════════ */
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  background: var(--ink);
+  color: #fff;
+  padding: clamp(28px, 6vw, 52px) var(--pad) clamp(24px, 5vw, 40px);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -60px;
+  width: clamp(180px, 40vw, 280px);
+  height: clamp(180px, 40vw, 280px);
+  background: radial-gradient(circle, rgba(200,75,49,.22) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -30px;
+  width: clamp(140px, 30vw, 200px);
+  height: clamp(140px, 30vw, 200px);
+  background: radial-gradient(circle, rgba(37,99,168,.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-inner { max-width: var(--max-w); margin: 0 auto; position: relative; }
+.hero-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(11px, 2vw, 13px);
+  color: rgba(255,255,255,.45);
+  letter-spacing: .18em;
+  margin-bottom: 8px;
+}
+.hero h1 {
+  font-size: clamp(22px, 5.5vw, 34px);
+  font-weight: 700;
+  line-height: 1.18;
+  margin-bottom: 10px;
+}
+.hero-meta {
+  font-size: clamp(12px, 2.2vw, 14px);
+  color: rgba(255,255,255,.6);
+  line-height: 1.9;
+}
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 99px;
+  padding: 5px 13px;
+  font-size: clamp(11px, 2vw, 13px);
+  margin-top: 14px;
+  color: rgba(255,255,255,.88);
+}
+
+/* ═══════════════════════════════════════
+   STICKY TABS
+═══════════════════════════════════════ */
+.tabs-bar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.tabs-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 4px;
+  gap: 2px;
+}
+.tabs-inner::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 10px clamp(10px, 3vw, 18px);
+  color: rgba(255,255,255,.45);
+  font-size: clamp(11px, 2.2vw, 13px);
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition: color .18s, border-color .18s;
+}
+.tab:hover  { color: rgba(255,255,255,.75); }
+.tab.active { color: #fff; }
+.tab[data-day="1"].active { border-color: var(--d1); }
+.tab[data-day="2"].active { border-color: var(--d2); }
+.tab[data-day="3"].active { border-color: var(--d3); }
+.tab[data-day="4"].active { border-color: var(--d4); }
+.tab[data-day="r"].active  { border-color: #888; }
+
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+.section      { display: none; }
+.section.on   { display: block; }
+.section-wrap { max-width: var(--max-w); margin: 0 auto; padding-bottom: 80px; }
+
+/* ─ Day header ─ */
+.day-hd {
+  padding: clamp(16px,4vw,24px) var(--pad) clamp(12px,3vw,18px);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  padding-left: calc(var(--pad) + 8px);
+}
+.day-hd-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  border-radius: 0 3px 3px 0;
+}
+.day-hd-label {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(10px, 1.8vw, 11px);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.day-hd-title {
+  font-size: clamp(17px, 4vw, 22px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.day-hd-sub {
+  font-size: clamp(12px, 2.2vw, 13.5px);
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════ */
+.tl { padding: 6px 0; }
+
+.ev {
+  display: flex;
+  position: relative;
+}
+.ev-l {
+  width: clamp(52px, 12vw, 68px);
+  flex-shrink: 0;
+  padding: 14px 0 0 var(--pad);
+  position: relative;
+}
+/* vertical connector */
+.ev:not(:last-child) .ev-l::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--pad) + 12px);
+  top: 24px; bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+.ev-dot {
+  position: absolute;
+  left: calc(var(--pad) + 8px);
+  top: 16px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 2px solid var(--bg);
+}
+.ev-time {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(10px, 1.8vw, 11px);
+  color: var(--muted);
+  padding-top: 2px;
+  line-height: 1;
+}
+.ev-r {
+  flex: 1;
+  padding: clamp(10px,2.5vw,14px) var(--pad) clamp(10px,2.5vw,14px) 8px;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.ev:last-child .ev-r { border-bottom: none; }
+
+.ev-title {
+  font-size: clamp(13px, 2.6vw, 15px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 3px;
+  word-break: break-word;
+}
+.ev-note {
+  font-size: clamp(11.5px, 2.1vw, 13px);
+  color: var(--ink2);
+  line-height: 1.55;
+  margin-bottom: 5px;
+}
+
+/* dot colours by event type */
+.ev.food   .ev-dot { background: var(--d1); }
+.ev.train  .ev-dot { background: var(--d2); }
+.ev.sight  .ev-dot { background: var(--d3); }
+.ev.shop   .ev-dot { background: var(--gold); }
+.ev.flight .ev-dot { background: var(--d4); }
+.ev.izaka  .ev-dot { background: var(--izakaya); }
+
+/* ─ Transit box ─ */
+.tx {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  background: var(--transit-bg);
+  border-left: 3px solid var(--transit-border);
+  border-radius: 0 7px 7px 0;
+  padding: 7px 10px;
+  margin-top: 5px;
+  font-size: clamp(11px, 2vw, 12.5px);
+  color: #1e4080;
+  line-height: 1.55;
+  word-break: break-word;
+}
+.tx-ico { flex-shrink: 0; font-size: 13px; margin-top: 1px; }
+
+/* ═══════════════════════════════════════
+   IZAKAYA CARD
+═══════════════════════════════════════ */
+.iz-wrap {
+  padding: 0 var(--pad);
+  margin: 8px 0 4px;
+}
+.iz-card {
+  background: linear-gradient(135deg,#fff8f5,#fff);
+  border: 1px solid #f5c5a0;
+  border-radius: 14px;
+  padding: clamp(12px,3vw,18px);
+  position: relative;
+  overflow: hidden;
+}
+.iz-card::before {
+  content: '🍶';
+  position: absolute;
+  right: 12px; top: 10px;
+  font-size: 30px;
+  opacity: .12;
+  pointer-events: none;
+}
+.iz-label {
+  font-size: clamp(10px,1.8vw,11px);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--izakaya);
+  margin-bottom: 10px;
+}
+.iz-item {
+  padding: 9px 0;
+  border-bottom: 1px solid #f5e8e0;
+}
+.iz-item:last-child { border-bottom: none; padding-bottom: 0; }
+.iz-name {
+  font-size: clamp(12.5px,2.4vw,14px);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.iz-desc {
+  font-size: clamp(11px,2vw,12.5px);
+  color: var(--ink2);
+  line-height: 1.55;
+  margin-bottom: 5px;
+}
+.iz-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip {
+  font-size: clamp(10px,1.8vw,11px);
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.chip-g { background:#e8f5e9; color:#2d7a4f; }
+.chip-b { background:#e3f2fd; color:#1565c0; }
+.chip-o { background:#fff3e0; color:#e65100; }
+.chip-p { background:#f3e5f5; color:#6a1b9a; }
+
+/* ═══════════════════════════════════════
+   TIP / WARN BOXES
+═══════════════════════════════════════ */
+.tip, .warn {
+  margin: 8px var(--pad);
+  padding: 10px 14px;
+  border-radius: 0 9px 9px 0;
+  font-size: clamp(11.5px,2.1vw,13px);
+  line-height: 1.65;
+  word-break: break-word;
+}
+.tip  { background:#fffbf0; border-left:3px solid var(--gold); color:#5a4000; }
+.warn { background:#fff5f5; border-left:3px solid var(--d1);   color:#8a0000; }
+
+/* full-width transit row */
+.tx-row {
+  margin: 6px var(--pad) 12px;
+  border-radius: 9px;
+}
+
+/* ═══════════════════════════════════════
+   INFO TAB  
+═══════════════════════════════════════ */
+.info-pad { padding: 0 var(--pad) 0; }
+.info-h {
+  font-size: clamp(12.5px,2.3vw,14px);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 18px 0 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.st-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%,220px), 1fr));
+  gap: 8px;
+}
+.st-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 10px 13px;
+}
+.st-name { font-size: clamp(12px,2.2vw,13.5px); font-weight: 700; margin-bottom: 2px; }
+.st-line { font-size: clamp(11px,2vw,12px);   color: var(--d2); margin-bottom: 2px; }
+.st-note { font-size: clamp(10.5px,1.9vw,11.5px); color: var(--muted); }
+
+.icoca {
+  background: linear-gradient(135deg,#1e3a5f,#2563a8);
+  color: #fff;
+  border-radius: 11px;
+  padding: clamp(10px,2.5vw,14px) clamp(12px,3vw,16px);
+  font-size: clamp(12px,2.1vw,13.5px);
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.icoca strong { color: #90d4ff; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 20px var(--pad);
+  font-size: clamp(10px,1.8vw,12px);
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+/* ═══════════════════════════════════════
+   DESKTOP TWEAKS (≥ 600px)
+═══════════════════════════════════════ */
+@media (min-width: 600px) {
+  .tl { padding: 8px 0; }
+  .ev-r { padding-left: 12px; }
+  .hero { padding-top: 52px; padding-bottom: 44px; }
+  .iz-card { padding: 18px 20px; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-jp">大阪旅行プラン · 2025</div>
+    <h1>🗾 Osaka Trip<br>27 Feb – 2 Mar</h1>
+    <div class="hero-meta">
+      Kanazawa → Osaka → BKK<br>
+      ทุกร้าน · ทุกเส้นทาง · ครบในหน้าเดียว
+    </div>
+    <div class="hero-chip">🏨 Best Western Plus Hotel Fino Kitahama</div>
+  </div>
+</div>
+
+<!-- ══════════ TABS ══════════ -->
+<nav class="tabs-bar" role="tablist" aria-label="เลือกวัน">
+  <div class="tabs-inner">
+    <button class="tab active" data-day="1" onclick="show('1')" role="tab" aria-selected="true">🚄 Day 1<br><small>Thu 27 Feb</small></button>
+    <button class="tab" data-day="2" onclick="show('2')" role="tab">🏯 Day 2<br><small>Fri 28 Feb</small></button>
+    <button class="tab" data-day="3" onclick="show('3')" role="tab">🍢 Day 3<br><small>Sat 1 Mar</small></button>
+    <button class="tab" data-day="4" onclick="show('4')" role="tab">✈️ Day 4<br><small>Sun 2 Mar</small></button>
+    <button class="tab" data-day="r" onclick="show('r')" role="tab">🗺️ Info</button>
+  </div>
+</nav>
+
+<!-- ══════════ CONTENT ══════════ -->
+<main>
+
+<!-- ─────────── DAY 1 ─────────── -->
+<div class="section on" id="s1" role="tabpanel">
+<div class="section-wrap">
+
+  <div class="day-hd">
+    <div class="day-hd-bar" style="background:var(--d1)"></div>
+    <div class="day-hd-label" style="color:var(--d1)">Day 1 · Thu 27 Feb</div>
+    <div class="day-hd-title">Arrival Day 🚄</div>
+    <div class="day-hd-sub">Kanazawa 14:00 → เช็คอิน → ราเมนหัวกระดูกวัว</div>
+  </div>
+
+  <div class="tl">
+
+    <div class="ev train">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">14:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🚄 ออกจาก Kanazawa Station</div>
+        <div class="ev-note">Thunderbird Limited Express → Shin-Osaka (~2 ชม. 15 นาที)</div>
+        <div class="tx"><span class="tx-ico">💡</span>ซื้อ ICOCA Card ¥2,000 ที่ Shin-Osaka เลย (มัดจำ ¥500)</div>
+      </div>
+    </div>
+
+    <div class="ev train">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">16:15</div></div>
+      <div class="ev-r">
+        <div class="ev-title">ถึง Shin-Osaka Station</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line 🔴 → Yodoyabashi หรือ Tanimachi Line → Higashi-Umeda (~5 นาที)</div>
+      </div>
+    </div>
+
+    <div class="ev train">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">16:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">เดินทางต่อ → Kitahama</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Sakaisuji Line 🟡 → Kitahama (K14) · ใช้เวลา ~10 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev sight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">17:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🏨 เช็คอิน Best Western Plus Fino Kitahama</div>
+        <div class="tx"><span class="tx-ico">🚶</span>Exit 6 ของ Kitahama Station เดิน ~3 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev sight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">17:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🌊 เดินเล่น Nakanoshima River Walk</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจากโรงแรม ~5 นาที ข้ามสะพานเข้า Nakanoshima</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">19:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🍜 Ninjomenya Gyukotsuo</div>
+        <div class="ev-note">ราเมนซุปหัวกระดูกวัวเข้มข้น ⭐ 4.7 · เปิดถึง 23:30 · <strong>รับเงินสดเท่านั้น</strong></div>
+        <div class="tx"><span class="tx-ico">🚇</span>Midosuji: Yodoyabashi → Shinsaibashi (1 สถานี) Exit 7 เดิน ~5 นาที<br>หรือ 🚶 เดินจากโรงแรม ~22 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">21:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🍸 Cocktail Bar แถว Yodoyabashi</div>
+        <div class="ev-note">บาร์ริมแม่น้ำ Dojima บรรยากาศดีตอนกลางคืน</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจากร้านราเมน ~5 นาที</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ─────────── DAY 2 ─────────── -->
+<div class="section" id="s2" role="tabpanel">
+<div class="section-wrap">
+
+  <div class="day-hd">
+    <div class="day-hd-bar" style="background:var(--d2)"></div>
+    <div class="day-hd-label" style="color:var(--d2)">Day 2 · Fri 28 Feb</div>
+    <div class="day-hd-title">Coffee, Castle & Dotonbori 🏯</div>
+    <div class="day-hd-sub">วันเดินทางหลักด้วย Osaka Metro</div>
+  </div>
+
+  <div class="tl">
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">09:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">☕ Sakimoto Coffee</div>
+        <div class="ev-note">⭐ 4.3 · เปิด 09:00 · <strong>Egg sandwich หมดเร็วมาก!</strong> ไปก่อน 09:30 เลย</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Sakaisuji Line: Kitahama → Namba (~3 สถานี) เดินจาก Namba Station ~5 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev sight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">10:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🏯 Osaka Castle</div>
+        <div class="ev-note">⭐ 4.4 · เปิด 09:00–18:00 · แนะนำซื้อตั๋วออนไลน์ก่อนเพื่อข้ามคิว</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Tanimachi Line: Namba → Tanimachi 4-chome (~10 นาที) Exit 9 เดิน ~12 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">12:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🦑 Kuromon Market</div>
+        <div class="ev-note">⭐ 4.1 · ตลาดอาหารสด ชิมซีฟู้ดหน้าร้านได้เลย</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Tanimachi Line: Tanimachi 4-chome → Tanimachi 9-chome (2 สถานี) Exit 2 เดิน ~3 นาที<br>หรือ 🚶 เดินจากปราสาท ~20 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">13:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🐙 Kukuru — ทาโกะยากิ Dotonbori</div>
+        <div class="ev-note">เปิด 11:00 · variety style ริม Dotonbori</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจาก Kuromon Market ~10 นาที มุ่งหน้า Dotonbori</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">14:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🍜 Kingemon — ราเมน Dotonbori</div>
+        <div class="ev-note">Osaka Gold Shoyu Ramen · เปิด 24 ชั่วโมง</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจาก Kukuru ~3 นาที ในซอยเดียวกัน</div>
+      </div>
+    </div>
+
+    <div class="ev shop">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">15:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🛍️ Shinsaibashi + Donki — ร่ม & ผ้าพันคอ</div>
+        <div class="ev-note"><strong>ร่มพับ:</strong> Donki ¥500–800 · Loft/Tokyu Hands ¥800–1,500<br><strong>ผ้าพันคอ:</strong> Uniqlo / GU ราคาดี</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจาก Dotonbori ข้าม Ebisubashi ~3 นาที ทิศเหนือเข้า arcade</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">17:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🥟 Tsuruhashi Fugetsu — โอโคโนมิยากิ</div>
+        <div class="ev-note">สาขา Dotonbori Ebisubashi · ชั้น 3 · เปิด 11:00–23:00</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจาก Shinsaibashi ~5 นาที · ตึกตรงข้าม Kani Doraku ริม Ebisubashi</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="iz-wrap">
+    <div class="iz-card">
+      <div class="iz-label">🍶 อิซากายะคืน Day 2 — ใกล้โรงแรม</div>
+
+      <div class="iz-item">
+        <div class="iz-name">PARKING Kitahama Fermentation Plant ⭐ 4.6</div>
+        <div class="iz-desc">Sake tasting set ริมแม่น้ำ Nakanoshima · outdoor terrace · วิว sunset สวยมาก · kegged sake สดที่สุด</div>
+        <div class="iz-tags">
+          <span class="chip chip-g">🏮 Top pick</span>
+          <span class="chip chip-b">🚶 ~4 นาที</span>
+          <span class="chip chip-o">17:00–22:00</span>
+        </div>
+      </div>
+
+      <div class="iz-item">
+        <div class="iz-name">Futokoroya ⭐ 4.4</div>
+        <div class="iz-desc">Udon sashimi สไตล์ไม่เหมือนที่ไหน · oden ไม่ใส่สารกันบูด · Sapporo beer สด No.1 ใน Osaka</div>
+        <div class="iz-tags">
+          <span class="chip chip-g">🏮 Local secret</span>
+          <span class="chip chip-b">🚶 ~5 นาที</span>
+          <span class="chip chip-o">17:00–00:00</span>
+        </div>
+      </div>
+
+      <div class="iz-item">
+        <div class="iz-name">Maruju Yodoyabashi ⭐ 4.6</div>
+        <div class="iz-desc">Hidden gem ริมแม่น้ำ · ไก่ย่างซีฟู้ดเด็ดมาก · staff บางคนพูดอังกฤษ · kappo-counter style</div>
+        <div class="iz-tags">
+          <span class="chip chip-g">🏮 Hidden gem</span>
+          <span class="chip chip-b">🚇 ~3 นาที</span>
+          <span class="chip chip-o">17:00–23:30</span>
+        </div>
+      </div>
+
+      <div class="iz-item">
+        <div class="iz-name">よどやばし 燕 (Hana) ⭐ 4.3</div>
+        <div class="iz-desc">Kappo-counter · oden ชั้นเลิศ · clay pot rice สุดอร่อย · ไม่มีนักท่องเที่ยวเลย</div>
+        <div class="iz-tags">
+          <span class="chip chip-g">🏮 Local มากๆ</span>
+          <span class="chip chip-b">🚇 ~3 นาที</span>
+          <span class="chip chip-o">17:00–23:30</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tx tx-row" style="margin:6px var(--pad) 0">
+    <span class="tx-ico">🚇</span>
+    <span>กลับโรงแรม: Namba → Yodoyabashi (Midosuji ~8 นาที) หรือ Namba → Kitahama (Sakaisuji ~3 สถานี)</span>
+  </div>
+
+</div>
+</div>
+
+<!-- ─────────── DAY 3 ─────────── -->
+<div class="section" id="s3" role="tabpanel">
+<div class="section-wrap">
+
+  <div class="day-hd">
+    <div class="day-hd-bar" style="background:var(--d3)"></div>
+    <div class="day-hd-label" style="color:var(--d3)">Day 3 · Sat 1 Mar</div>
+    <div class="day-hd-title">Shinsekai & Sutadon 🍢</div>
+    <div class="day-hd-sub">Tennoji → Shinsekai → Dotonbori</div>
+  </div>
+
+  <div class="tl">
+
+    <div class="ev sight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">10:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🦁 Tennoji & Shinsekai</div>
+        <div class="ev-note">⭐ 4.2 · ย่าน retro · หอ Tsutenkaku · นีออน · บรรยากาศย้อนยุค</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line 🔴: Yodoyabashi → Dobutsuen-mae (~15 นาที) Exit 1 เดิน ~7 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">12:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🍢 Kushikatsu — ใน Shinsekai</div>
+        <div class="ev-note">กฎเหล็ก: <strong>ห้ามจิ้ม sauce ซ้ำเด็ดขาด!</strong> · ร้าน Daruma หรือ local แถว Tsutenkaku</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินในย่าน Shinsekai เอง ร้านเยอะมาก</div>
+      </div>
+    </div>
+
+    <div class="ev train">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">14:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">กลับเข้าตัวเมือง</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line: Dobutsuen-mae → Namba (~5 นาที) หรือ → Shinsaibashi</div>
+      </div>
+    </div>
+
+    <div class="ev food">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">19:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🥩 Densetsu no Sutadon'ya</div>
+        <div class="ev-note">ข้าวหน้าเนื้อกระเทียม legendary · สั่งจากตู้ · ¥630–¥910 · ⭐ 3.7<br>มาพร้อมซุปมิโสะ + ไข่ดิบ</div>
+        <div class="tx"><span class="tx-ico">🚶</span>ใน Dotonbori เดินได้เลย ~3 นาที จาก Ebisubashi</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="iz-wrap">
+    <div class="iz-card" style="background:linear-gradient(135deg,#f5fff8,#fff);border-color:#a0d4b4;">
+      <div class="iz-label" style="color:var(--d3)">🍶 อิซากายะคืน Day 3</div>
+
+      <div class="iz-item">
+        <div class="iz-name">Dynamic Kitchen & Bar Hibiki ⭐ 4.5</div>
+        <div class="iz-desc">ซาชิมิสด 5 ชนิด · เนื้อ Wagyu · staff อธิบายทุกจาน · Nakanoshima · บรรยากาศดีมาก</div>
+        <div class="iz-tags">
+          <span class="chip chip-b">🐟 Seafood</span>
+          <span class="chip chip-b">🚶 ~8 นาทีจากโรงแรม</span>
+          <span class="chip chip-o">17:00–23:00</span>
+        </div>
+      </div>
+
+      <div class="iz-item">
+        <div class="iz-name">PARKING Kitahama Fermentation Plant ⭐ 4.6</div>
+        <div class="iz-desc">ถ้ายัง! ยังไม่ได้ไป Day 2 — Sake bar ริมแม่น้ำ Nakanoshima วิวดีที่สุด</div>
+        <div class="iz-tags">
+          <span class="chip chip-g">🏮 อย่าพลาด</span>
+          <span class="chip chip-b">🚶 ~4 นาที</span>
+          <span class="chip chip-o">17:00–22:00</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tx tx-row" style="margin:6px var(--pad) 0">
+    <span class="tx-ico">🚇</span>
+    <span>กลับโรงแรม: Namba → Yodoyabashi (~8 นาที) หรือ Namba → Kitahama (Sakaisuji)</span>
+  </div>
+
+</div>
+</div>
+
+<!-- ─────────── DAY 4 ─────────── -->
+<div class="section" id="s4" role="tabpanel">
+<div class="section-wrap">
+
+  <div class="day-hd">
+    <div class="day-hd-bar" style="background:var(--d4)"></div>
+    <div class="day-hd-label" style="color:var(--d4)">Day 4 · Sun 2 Mar</div>
+    <div class="day-hd-title">Check-out & Airport ✈️</div>
+    <div class="day-hd-sub">เช็คเอาท์ 11:00 · ถึง KIX ก่อน 17:00</div>
+  </div>
+
+  <div class="tl">
+
+    <div class="ev sight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">08:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🌅 เดินเล่น Nakanoshima เช้า</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจากโรงแรม ~5 นาที สวยมากตอนเช้า</div>
+      </div>
+    </div>
+
+    <div class="ev sight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">10:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🧳 เก็บของ / Check-out</div>
+        <div class="ev-note">ฝากกระเป๋าที่โรงแรมได้จนกว่าจะออกเดินทาง</div>
+      </div>
+    </div>
+
+    <div class="ev shop">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">11:15</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🛍️ LUCUA Osaka (Umeda) — Final Souvenir</div>
+        <div class="ev-note">ของฝากชั้นดี · ร่ม premium · ผ้าพันคอ · เปิด 10:30</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Tanimachi Line: Kitahama → Higashiumeda (~10 นาที) · LUCUA อยู่เหนือ Osaka Station ~5 นาที</div>
+      </div>
+    </div>
+
+    <div class="ev shop">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">13:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🛒 Donki Namba — KitKat & ขนม</div>
+        <div class="tx"><span class="tx-ico">🚇</span>Midosuji Line: Umeda → Namba (~12 นาที)</div>
+      </div>
+    </div>
+
+    <div class="ev train">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">14:30</div></div>
+      <div class="ev-r">
+        <div class="ev-title">มุ่งหน้า Nankai Namba Station</div>
+        <div class="tx"><span class="tx-ico">🚶</span>เดินจาก Donki ~5 นาที · ดูป้ายสีส้ม <strong>Nankai</strong> (ต่างจาก Osaka Metro!)</div>
+      </div>
+    </div>
+
+    <div class="ev flight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">15:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🚄 Nankai Rapi:t Express → KIX</div>
+        <div class="ev-note">¥1,430 (Super Seat ¥1,730) · ~38 นาที · ออกทุก 30 นาที</div>
+        <div class="tx"><span class="tx-ico">💡</span>Super Seat ชั้น 1 วิวดีมาก · ซื้อล่วงหน้าที่เคาน์เตอร์หรือ Nankai app</div>
+      </div>
+    </div>
+
+    <div class="ev flight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">15:40</div></div>
+      <div class="ev-r">
+        <div class="ev-title">✅ ถึง KIX — เช็คอิน + Duty Free</div>
+        <div class="ev-note">เหลือเวลา 1 ชั่วโมง 20 นาทีก่อน 17:00 ✅</div>
+      </div>
+    </div>
+
+    <div class="ev flight">
+      <div class="ev-l"><div class="ev-dot"></div><div class="ev-time">21:00</div></div>
+      <div class="ev-r">
+        <div class="ev-title">🛫 Flight กลับไทย 🇹🇭</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="warn" style="margin-top:12px">
+    ⚠️ <strong>สำคัญ:</strong> Nankai Rapi:t ออกจาก <strong>Nankai Namba Station</strong> (ใต้ Takashimaya) ≠ Osaka Metro Namba — ดูป้ายสีส้ม Nankai
+  </div>
+
+</div>
+</div>
+
+<!-- ─────────── INFO ─────────── -->
+<div class="section" id="sr" role="tabpanel">
+<div class="section-wrap">
+<div class="info-pad">
+
+  <div class="info-h">🚇 สถานีที่ใช้บ่อย</div>
+  <div class="st-grid">
+    <div class="st-card"><div class="st-name">Kitahama (K14)</div><div class="st-line">Sakaisuji Line 🟡</div><div class="st-note">ใกล้โรงแรมที่สุด</div></div>
+    <div class="st-card"><div class="st-name">Yodoyabashi (M17)</div><div class="st-line">Midosuji Line 🔴</div><div class="st-note">เดิน ~5 นาทีจากโรงแรม</div></div>
+    <div class="st-card"><div class="st-name">Namba (M20)</div><div class="st-line">Midosuji 🔴 / Sennichimae 🩷</div><div class="st-note">Day 2 & 3 ทั้งวัน</div></div>
+    <div class="st-card"><div class="st-name">Tennoji (M23)</div><div class="st-line">Midosuji 🔴 / Tanimachi 🟣</div><div class="st-note">Day 3 Shinsekai</div></div>
+    <div class="st-card"><div class="st-name">Higashiumeda</div><div class="st-line">Tanimachi 🟣</div><div class="st-note">Day 4 → LUCUA Osaka</div></div>
+    <div class="st-card" style="border-color:#f5a623"><div class="st-name">Nankai Namba 🟠</div><div class="st-line" style="color:#c05a00">Nankai Line สีส้ม ⚠️</div><div class="st-note">Rapi:t → KIX เท่านั้น</div></div>
+  </div>
+
+  <div class="icoca">
+    💳 <strong>ICOCA Card</strong> — ซื้อ ¥2,000 (รวมมัดจำ ¥500) ที่ Shin-Osaka หรือ Osaka Station<br>
+    ใช้ได้กับ <strong>Osaka Metro ทุกสาย</strong> + รถเมล์ + ร้านสะดวกซื้อ<br>
+    คืนได้ก่อนกลับที่เครื่อง Green Windows
+  </div>
+
+  <div class="info-h">🍶 อิซากายะแนะนำทั้งหมด</div>
+
+  <div class="iz-card" style="margin:0">
+    <div class="iz-label">ใกล้โรงแรม Kitahama — เดินได้ทั้งหมด</div>
+
+    <div class="iz-item">
+      <div class="iz-name">PARKING Kitahama Fermentation Plant ⭐ 4.6</div>
+      <div class="iz-desc">Sake tasting set · outdoor terrace ริมแม่น้ำ · วิว sunset สวยที่สุด · kegged sake สดมาก</div>
+      <div class="iz-tags"><span class="chip chip-g">🏮 No.1 pick</span><span class="chip chip-b">🚶 ~4 นาที</span><span class="chip chip-o">17:00–22:00</span></div>
+    </div>
+
+    <div class="iz-item">
+      <div class="iz-name">Futokoroya ⭐ 4.4</div>
+      <div class="iz-desc">Udon sashimi ไม่เหมือนที่ไหน · oden traditional · Sapporo beer สด No.1 Osaka</div>
+      <div class="iz-tags"><span class="chip chip-g">🏮 Local secret</span><span class="chip chip-b">🚶 ~5 นาที</span><span class="chip chip-o">17:00–00:00</span></div>
+    </div>
+
+    <div class="iz-item">
+      <div class="iz-name">Maruju Yodoyabashi ⭐ 4.6</div>
+      <div class="iz-desc">Hidden gem ริมแม่น้ำ · ไก่ย่าง + ซีฟู้ดเด็ด · staff พูดอังกฤษ · kappo-counter</div>
+      <div class="iz-tags"><span class="chip chip-g">🏮 Hidden gem</span><span class="chip chip-b">🚇 ~3 นาที</span><span class="chip chip-o">17:00–23:30</span></div>
+    </div>
+
+    <div class="iz-item">
+      <div class="iz-name">よどやばし 燕 (Hana) ⭐ 4.3</div>
+      <div class="iz-desc">Kappo-counter · oden ชั้นเลิศ · clay pot rice สุดอร่อย · ไม่มีนักท่องเที่ยว</div>
+      <div class="iz-tags"><span class="chip chip-g">🏮 Local มากๆ</span><span class="chip chip-b">🚇 ~3 นาที</span><span class="chip chip-o">17:00–23:30</span></div>
+    </div>
+
+    <div class="iz-item">
+      <div class="iz-name">Dynamic Kitchen & Bar Hibiki ⭐ 4.5</div>
+      <div class="iz-desc">ซาชิมิสด 5 ชนิด · Wagyu · staff อธิบายทุกจาน · Nakanoshima · บรรยากาศดี</div>
+      <div class="iz-tags"><span class="chip chip-b">🐟 Seafood</span><span class="chip chip-b">🚶 ~8 นาที</span><span class="chip chip-o">17:00–23:00</span></div>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top:16px">
+    💡 <strong>Quick Tips</strong><br>
+    • Sakimoto Coffee: ไปถึงก่อน 09:30 ไม่งั้น egg sandwich หมด<br>
+    • Ninjomenya Gyukotsuo: เงินสดเท่านั้น ไม่รับบัตร<br>
+    • Osaka Castle: ซื้อตั๋วออนไลน์ข้ามคิวยาวได้เลย<br>
+    • ร่มพับถูกสุด: Donki ¥500–800 · ผ้าพันคอดีสุด: Uniqlo Shinsaibashi
+  </div>
+
+</div>
+</div>
+</div>
+
+</main>
+
+<footer>🗾 Osaka Trip Plan · 27 Feb – 2 Mar 2025 · Safe travels! ✈️</footer>
+
+<script>
+function show(day) {
+  // sections
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('on'));
+  var target = document.getElementById(day === 'r' ? 'sr' : 's' + day);
+  if (target) target.classList.add('on');
+  // tabs
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  var activeTab = document.querySelector('.tab[data-day="' + day + '"]');
+  if (activeTab) {
+    activeTab.classList.add('active');
+    activeTab.setAttribute('aria-selected', 'true');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
